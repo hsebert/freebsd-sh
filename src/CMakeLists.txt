@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(CMAKE_C_FLAGS "-DSHELL -D'__FBSDID(x)='")
+set(CMAKE_C_FLAGS "-DSHELL -D'__FBSDID(x)=' -Wp,-w")
 
 include_directories(bltin gen)
 
