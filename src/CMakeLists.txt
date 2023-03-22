@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.1)
 
-set(CMAKE_C_FLAGS "-DSHELL -D'__FBSDID(x)=' -Wp,-w -Wall -Wextra")
+set(CMAKE_C_FLAGS "-DSHELL -D'__FBSDID(x)='")
 
 include_directories(bltin gen)
 
@@ -13,3 +13,5 @@ add_executable(sh alias.c arith_yacc.c arith_yylex.c cd.c bltin/echo.c error.c e
 	gen/builtins.h gen/nodes.h gen/syntax.h gen/token.h)
 
 target_link_libraries(sh edit)
+
+target_compile_options(sh PRIVATE -Wp,-w -Wall -Wextra)
