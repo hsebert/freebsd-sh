@@ -40,6 +40,8 @@ static char sccsid[] = "@(#)parser.c	8.7 (Berkeley) 5/16/95";
 #include <sys/cdefs.h>
 __FBSDID("$FreeBSD$");
 
+#define MAXLOGNAME 32
+
 #include <sys/param.h>
 #include <pwd.h>
 #include <stdlib.h>
