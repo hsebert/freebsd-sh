@@ -165,7 +165,7 @@ signame_to_signum(const char *sig)
 	if (strncasecmp(sig, "SIG", 3) == 0)
 		sig += 3;
 	for (n = 1; n < SIGRTMAX; n++) {
-		if (!strcasecmp(strsignale(n), sig))
+		if (!strcasecmp(strsignal(n), sig))
 			return (n);
 	}
 	return (-1);
@@ -190,7 +190,7 @@ printsignals(FILE *fp)
 	int n;
 
 	for (n = 1; n < SIGRTMAX; n++) {
-		(void)fprintf(fp, "%s", strsignale(n));
+		(void)fprintf(fp, "%s", strsignal(n));
 		if (n == (SIGRTMAX / 2) || n == (SIGRTMAX - 1))
 			(void)fprintf(fp, "\n");
 		else
