@@ -48,6 +48,7 @@
 #include "nodes.h"
 #include "../memalloc.h"
 #include "../mystring.h"
+#include "../machdep.h"
 
 
 struct nodesize {
@@ -61,33 +62,33 @@ struct nodecopystate {
 };
 
 static const short nodesize[27] = {
-      ALIGN(sizeof (struct nbinary)),
-      ALIGN(sizeof (struct ncmd)),
-      ALIGN(sizeof (struct npipe)),
-      ALIGN(sizeof (struct nredir)),
-      ALIGN(sizeof (struct nredir)),
-      ALIGN(sizeof (struct nredir)),
-      ALIGN(sizeof (struct nbinary)),
-      ALIGN(sizeof (struct nbinary)),
-      ALIGN(sizeof (struct nif)),
-      ALIGN(sizeof (struct nbinary)),
-      ALIGN(sizeof (struct nbinary)),
-      ALIGN(sizeof (struct nfor)),
-      ALIGN(sizeof (struct ncase)),
-      ALIGN(sizeof (struct nclist)),
-      ALIGN(sizeof (struct nclist)),
-      ALIGN(sizeof (struct narg)),
-      ALIGN(sizeof (struct narg)),
-      ALIGN(sizeof (struct nfile)),
-      ALIGN(sizeof (struct nfile)),
-      ALIGN(sizeof (struct nfile)),
-      ALIGN(sizeof (struct nfile)),
-      ALIGN(sizeof (struct nfile)),
-      ALIGN(sizeof (struct ndup)),
-      ALIGN(sizeof (struct ndup)),
-      ALIGN(sizeof (struct nhere)),
-      ALIGN(sizeof (struct nhere)),
-      ALIGN(sizeof (struct nnot)),
+      SHELL_ALIGN(sizeof (struct nbinary)),
+      SHELL_ALIGN(sizeof (struct ncmd)),
+      SHELL_ALIGN(sizeof (struct npipe)),
+      SHELL_ALIGN(sizeof (struct nredir)),
+      SHELL_ALIGN(sizeof (struct nredir)),
+      SHELL_ALIGN(sizeof (struct nredir)),
+      SHELL_ALIGN(sizeof (struct nbinary)),
+      SHELL_ALIGN(sizeof (struct nbinary)),
+      SHELL_ALIGN(sizeof (struct nif)),
+      SHELL_ALIGN(sizeof (struct nbinary)),
+      SHELL_ALIGN(sizeof (struct nbinary)),
+      SHELL_ALIGN(sizeof (struct nfor)),
+      SHELL_ALIGN(sizeof (struct ncase)),
+      SHELL_ALIGN(sizeof (struct nclist)),
+      SHELL_ALIGN(sizeof (struct nclist)),
+      SHELL_ALIGN(sizeof (struct narg)),
+      SHELL_ALIGN(sizeof (struct narg)),
+      SHELL_ALIGN(sizeof (struct nfile)),
+      SHELL_ALIGN(sizeof (struct nfile)),
+      SHELL_ALIGN(sizeof (struct nfile)),
+      SHELL_ALIGN(sizeof (struct nfile)),
+      SHELL_ALIGN(sizeof (struct nfile)),
+      SHELL_ALIGN(sizeof (struct ndup)),
+      SHELL_ALIGN(sizeof (struct ndup)),
+      SHELL_ALIGN(sizeof (struct nhere)),
+      SHELL_ALIGN(sizeof (struct nhere)),
+      SHELL_ALIGN(sizeof (struct nnot)),
 };
 
 
@@ -219,7 +220,7 @@ static void
 sizenodelist(struct nodelist *lp, struct nodesize *result)
 {
 	while (lp) {
-		result->blocksize += ALIGN(sizeof(struct nodelist));
+		result->blocksize += SHELL_ALIGN(sizeof(struct nodelist));
 		calcsize(lp->n, result);
 		lp = lp->next;
 	}
@@ -326,7 +327,7 @@ copynodelist(struct nodelist *lp, struct nodecopystate *state)
 	while (lp) {
 		*lpp = state->block;
 		state->block = (char *)state->block +
-		    ALIGN(sizeof(struct nodelist));
+		    SHELL_ALIGN(sizeof(struct nodelist));
 		(*lpp)->n = copynode(lp->n, state);
 		lp = lp->next;
 		lpp = &(*lpp)->next;

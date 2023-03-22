@@ -47,6 +47,7 @@ __FBSDID("$FreeBSD$");
 #include "error.h"
 #include "mystring.h"
 #include "expand.h"
+#include "machdep.h"
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -132,7 +133,7 @@ struct stack_block {
 	struct stack_block *prev;
 	/* Data follows */
 };
-#define SPACE(sp)	((char*)(sp) + ALIGN(sizeof(struct stack_block)))
+#define SPACE(sp)	((char*)(sp) + SHELL_ALIGN(sizeof(struct stack_block)))
 
 static struct stack_block *stackp;
 char *stacknxt;
@@ -149,7 +150,7 @@ stnewblock(int nbytes)
 	if (nbytes < MINSIZE)
 		nbytes = MINSIZE;
 
-	allocsize = ALIGN(sizeof(struct stack_block)) + ALIGN(nbytes);
+	allocsize = SHELL_ALIGN(sizeof(struct stack_block)) + SHELL_ALIGN(nbytes);
 
 	INTOFF;
 	sp = ckmalloc(allocsize);
@@ -167,7 +168,7 @@ stalloc(int nbytes)
 {
 	char *p;
 
-	nbytes = ALIGN(nbytes);
+	nbytes = SHELL_ALIGN(nbytes);
 	if (nbytes > stacknleft)
 		stnewblock(nbytes);
 	p = stacknxt;
@@ -258,10 +259,10 @@ growstackblock(int min)
 	if (min < stacknleft)
 		min = stacknleft;
 	if ((unsigned int)min >=
-	    INT_MAX / 2 - ALIGN(sizeof(struct stack_block)))
+	    INT_MAX / 2 - SHELL_ALIGN(sizeof(struct stack_block)))
 		error("Out of space");
 	min += stacknleft;
-	min += ALIGN(sizeof(struct stack_block));
+	min += SHELL_ALIGN(sizeof(struct stack_block));
 	newlen = 512;
 	while (newlen < min)
 		newlen <<= 1;
@@ -280,7 +281,7 @@ growstackblock(int min)
 		sstrend = stacknxt + stacknleft;
 		INTON;
 	} else {
-		newlen -= ALIGN(sizeof(struct stack_block));
+		newlen -= SHELL_ALIGN(sizeof(struct stack_block));
 		p = stalloc(newlen);
 		if (oldlen != 0)
 			memcpy(p, oldspace, oldlen);

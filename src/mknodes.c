@@ -57,6 +57,8 @@ __FBSDID("$FreeBSD$");
 #include <errno.h>
 #include <stdarg.h>
 
+#include "machdep.h"
+
 #define MAXTYPES 50		/* max number of node types */
 #define MAXFIELDS 20		/* max fields in a structure */
 #define BUFLEN 100		/* size of character buffers */
@@ -289,7 +291,7 @@ outsizes(FILE *cfile)
 
 	fprintf(cfile, "static const short nodesize[%d] = {\n", ntypes);
 	for (i = 0 ; i < ntypes ; i++) {
-		fprintf(cfile, "      ALIGN(sizeof (struct %s)),\n", nodestr[i]->tag);
+		fprintf(cfile, "      SHELL_ALIGN(sizeof (struct %s)),\n", nodestr[i]->tag);
 	}
 	fprintf(cfile, "};\n");
 }

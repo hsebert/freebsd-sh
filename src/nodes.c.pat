@@ -44,6 +44,7 @@
 #include "nodes.h"
 #include "memalloc.h"
 #include "mystring.h"
+#include "machdep.h"
 
 
 struct nodesize {
@@ -115,7 +116,7 @@ static void
 sizenodelist(struct nodelist *lp, struct nodesize *result)
 {
 	while (lp) {
-		result->blocksize += ALIGN(sizeof(struct nodelist));
+		result->blocksize += SHELL_ALIGN(sizeof(struct nodelist));
 		calcsize(lp->n, result);
 		lp = lp->next;
 	}
@@ -143,7 +144,7 @@ copynodelist(struct nodelist *lp, struct nodecopystate *state)
 	while (lp) {
 		*lpp = state->block;
 		state->block = (char *)state->block +
-		    ALIGN(sizeof(struct nodelist));
+		    SHELL_ALIGN(sizeof(struct nodelist));
 		(*lpp)->n = copynode(lp->n, state);
 		lp = lp->next;
 		lpp = &(*lpp)->next;
