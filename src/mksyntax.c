@@ -114,7 +114,7 @@ static void add(const char *, const char *);
 static void output_type_macros(void);
 
 int
-main(int argc __unused, char **argv __unused)
+main(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
 	int i;
 	char buf[80];

@@ -255,7 +255,7 @@ padvance(const char **path, const char **popt, const char *name)
 
 
 int
-hashcmd(int argc __unused, char **argv __unused)
+hashcmd(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
 	struct tblentry **pp;
 	struct tblentry *cmdp;
@@ -513,7 +513,7 @@ hashcd(void)
  */
 
 void
-changepath(const char *newval __unused)
+changepath(const char *newval __attribute__((unused)))
 {
 	clearcmdentry();
 }

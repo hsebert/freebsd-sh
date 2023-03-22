@@ -128,8 +128,8 @@ static int xxreadtoken(void);
 static int readtoken1(int, const char *, const char *, int);
 static int noexpand(char *);
 static void consumetoken(int);
-static void synexpect(int) __dead2;
-static void synerror(const char *) __dead2;
+static void synexpect(int) __attribute__((noreturn));
+static void synerror(const char *) __attribute__((noreturn));
 static void setprompt(int);
 static int pgetc_linecont(void);
 static void getusername(char *, size_t);
@@ -2024,7 +2024,7 @@ getusername(char *name, size_t namelen)
  *    should be added here.
  */
 char *
-getprompt(void *unused __unused)
+getprompt(void *unused __attribute__((unused)))
 {
 	static char ps[PROMPTLEN];
 	const char *fmt;

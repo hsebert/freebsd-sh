@@ -199,7 +199,7 @@ printaliases(void)
 }
 
 int
-aliascmd(int argc __unused, char **argv __unused)
+aliascmd(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
 	char *n, *v;
 	int ret = 0;
@@ -228,7 +228,7 @@ aliascmd(int argc __unused, char **argv __unused)
 }
 
 int
-unaliascmd(int argc __unused, char **argv __unused)
+unaliascmd(int argc __attribute__((unused)), char **argv __attribute__((unused)))
 {
 	int i;
 

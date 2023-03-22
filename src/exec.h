@@ -61,7 +61,7 @@ struct cmdentry {
 #define DO_ERR		0x01	/* prints errors */
 #define DO_NOFUNC	0x02	/* don't return shell functions, for command */
 
-void shellexec(char **, char **, const char *, int) __dead2;
+void shellexec(char **, char **, const char *, int) __attribute__((noreturn));
 char *padvance(const char **, const char **, const char *);
 void find_command(const char *, struct cmdentry *, int, const char *);
 int find_builtin(const char *, int *);
