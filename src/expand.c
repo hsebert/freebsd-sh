@@ -1171,7 +1171,7 @@ expmeta(char *enddir, char *name, struct arglist *arglist)
 		if (dp->d_name[0] == '.' && ! matchdot)
 			continue;
 		if (patmatch(start, dp->d_name)) {
-			namlen = dp->d_namlen;
+			namlen = strnlen(dp->d_name, 256);
 			if (enddir + namlen + 1 > expdir_end)
 				continue;
 			memcpy(enddir, dp->d_name, namlen + 1);
