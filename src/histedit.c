@@ -76,11 +76,12 @@ int displayhist;
 static int savehist;
 static FILE *el_in, *el_out;
 static bool in_command_completion;
+static size_t comparator_curpos;
 
 static char *fc_replace(const char *, char *, char *);
 static int not_fcnumber(const char *);
 static int str_to_event(const char *, int);
-static int comparator(const void *, const void *, void *);
+static int comparator(const void *, const void *);
 static char **sh_matches(const char *, int, int);
 static const char *append_char_function(const char *);
 static unsigned char sh_complete(EditLine *, int);
@@ -588,9 +589,9 @@ bindcmd(int argc, char **argv)
  * characters that we already know to compare equal (common prefix).
  */
 static int
-comparator(const void *a, const void *b, void *thunk)
+comparator(const void *a, const void *b)
 {
-	size_t curpos = (intptr_t)thunk;
+	size_t curpos = comparator_curpos;
 	return (strcmp(*(char *const *)a + curpos,
 		*(char *const *)b + curpos));
 }
@@ -664,8 +665,8 @@ out:
 	}
 	uniq = 1;
 	if (i > 1) {
-		qsort_s(matches + 1, i, sizeof(matches[0]), comparator,
-			(void *)(intptr_t)curpos);
+		comparator_curpos = curpos;
+		qsort(matches + 1, i, sizeof(matches[0]), comparator);
 		for (size_t k = 2; k <= i; k++) {
 			const char *l = matches[uniq] + curpos;
 			const char *r = matches[k] + curpos;
