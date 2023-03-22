@@ -52,6 +52,7 @@ __FBSDID("$FreeBSD$");
 /*
  * Editline and history functions (and glue).
  */
+#include "deconst.h"
 #include "shell.h"
 #include "parser.h"
 #include "var.h"

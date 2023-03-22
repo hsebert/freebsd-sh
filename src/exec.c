@@ -56,6 +56,7 @@ __FBSDID("$FreeBSD$");
  * would make the command name "hash" a misnomer.
  */
 
+#include "deconst.h"
 #include "shell.h"
 #include "main.h"
 #include "nodes.h"

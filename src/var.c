@@ -51,6 +51,7 @@ __FBSDID("$FreeBSD$");
 #include <locale.h>
 #include <langinfo.h>
 
+#include "deconst.h"
 #include "shell.h"
 #include "output.h"
 #include "expand.h"
