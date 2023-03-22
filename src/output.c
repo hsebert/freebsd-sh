@@ -51,6 +51,7 @@ __FBSDID("$FreeBSD$");
  */
 
 #include <stdio.h>	/* defines BUFSIZ */
+#include <bsd/stdio.h>	/* defines BUFSIZ */
 #include <string.h>
 #include <stdarg.h>
 #include <errno.h>
