@@ -38,7 +38,7 @@ extern History *hist;
 extern EditLine *el;
 extern int displayhist;
 
-#include <editline/filecomplete.h>
+#include "contrib/filecomplete.h"
 
 void histedit(void);
 void sethistsize(const char *);
