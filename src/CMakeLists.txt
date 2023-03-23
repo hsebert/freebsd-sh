@@ -23,7 +23,7 @@ add_executable(sh alias.c arith_yacc.c arith_yylex.c cd.c bltin/echo.c error.c e
 target_include_directories(sh PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(sh edit)
-if (LINUX)
+if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	target_link_libraries(sh bsd)
 endif()
 
