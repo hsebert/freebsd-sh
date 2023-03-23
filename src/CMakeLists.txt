@@ -43,6 +43,8 @@ add_executable(sh alias.c arith_yacc.c arith_yylex.c cd.c bltin/echo.c error.c e
 
 target_include_directories(sh PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
+add_dependencies(sh mksyntax mknodes)
+
 target_link_libraries(sh edit)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	target_link_libraries(sh bsd)
