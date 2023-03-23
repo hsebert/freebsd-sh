@@ -20,7 +20,7 @@ add_executable(sh alias.c arith_yacc.c arith_yylex.c cd.c bltin/echo.c error.c e
 	${CMAKE_CURRENT_BINARY_DIR}/builtins.c gen/nodes.c gen/syntax.c
 	${CMAKE_CURRENT_BINARY_DIR}/builtins.h gen/nodes.h gen/syntax.h gen/token.h)
 
-target_include_directories(sh PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(sh PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 target_link_libraries(sh edit)
 if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
