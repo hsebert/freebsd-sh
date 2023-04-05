@@ -81,8 +81,8 @@ extern volatile sig_atomic_t intpending;
 void exraise(int) __attribute__((noreturn));
 void onint(void) __attribute__((noreturn));
 void warning(const char *, ...) __attribute__((format(printf, 1, 2)));
-void error(const char *, ...) __attribute__((format(printf0, 1, 2))) __attribute__((noreturn));
-void errorwithstatus(int, const char *, ...) __attribute__((format(printf0, 2, 3))) __attribute__((noreturn));
+void error(const char *, ...) __attribute__((format(printf, 1, 2))) __attribute__((noreturn));
+void errorwithstatus(int, const char *, ...) __attribute__((format(printf, 2, 3))) __attribute__((noreturn));
 
 
 /*
