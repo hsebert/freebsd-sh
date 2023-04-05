@@ -222,7 +222,10 @@ again:
 	p = parsefile->buf + (parsenextc - parsefile->buf);
 	end = p + parselleft;
 	*end = '\0';
-	q = strchrnul(p, '\n');
+	/* q = strchrnul(p, '\n'); */
+	q = p;
+	while (*q != '\n' && *q != '\0')
+		++q;
 	if (q != end && *q == '\0') {
 		/* delete nul characters */
 		for (r = q; q != end; q++) {
